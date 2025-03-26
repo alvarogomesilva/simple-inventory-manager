@@ -7,11 +7,12 @@ export async function registerUser(request: Request, response: Response) {
     try {
 
         const user = await userService.createNewUser(userData)
-        response.status(201).json(user)
+        response.status(201).send(user)
     } catch (error: any) {
-        
+
         if (error.code === "P2002") {
-            return response.status(409).send("Email já existe.");
+            response.status(409).send("Email já existe.");
+            return;
         }
         console.log(error)
 
