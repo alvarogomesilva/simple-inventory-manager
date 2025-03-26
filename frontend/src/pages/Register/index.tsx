@@ -1,6 +1,25 @@
+import { FormEvent, useState } from "react";
 import { Link } from "react-router";
+import { api } from "../../services/api";
 
 export function Register() {
+    const [inputs, setInputs] = useState({
+        name: "",
+        email: "",
+        password: ""
+    })
+
+    const handleSubmit = async (e: FormEvent) => {
+        e.preventDefault()
+        
+        try {
+            const response  = await api.post('/register', inputs)
+            console.log(response.data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
     return (
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -9,24 +28,35 @@ export function Register() {
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6" action="#" method="POST">
+                <form 
+                    onSubmit={handleSubmit}
+                    className="space-y-6" action="#" method="POST">
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">Nome</label>
                         <div className="mt-2">
-                            <input type="text" name="name" id="name" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                            <input 
+                            value={inputs.name}
+                            onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
+                            type="text" name="name" id="name" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                         </div>
                     </div>
                     <div>
                         <label htmlFor="email" className="block text-sm/6 font-medium text-gray-900">Email</label>
                         <div className="mt-2">
-                            <input type="email" name="email" id="email" autoComplete="email" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                            <input 
+                            value={inputs.email}
+                            onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
+                            type="email" name="email" id="email" autoComplete="email" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                         </div>
                     </div>
 
                     <div>
                         <label htmlFor="password" className="block text-sm/6 font-medium text-gray-900">Senha</label>
                         <div className="mt-2">
-                            <input type="password" name="password" id="password" autoComplete="password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                            <input 
+                             value={inputs.password}
+                             onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
+                            type="password" name="password" id="password" autoComplete="password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
                         </div>
                     </div>
 
