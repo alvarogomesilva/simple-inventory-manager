@@ -46,7 +46,7 @@ export function Register() {
                             <input
                                 value={inputs.name}
                                 onChange={(e) => setInputs({ ...inputs, name: e.target.value })}
-                                type="text" name="name" id="name" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                type="text" name="name" id="name" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6" />
                         </div>
                     </div>
                     <div>
@@ -55,7 +55,7 @@ export function Register() {
                             <input
                                 value={inputs.email}
                                 onChange={(e) => setInputs({ ...inputs, email: e.target.value })}
-                                type="email" name="email" id="email" autoComplete="email" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                type="email" name="email" id="email" autoComplete="email" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6" />
                         </div>
                     </div>
 
@@ -65,13 +65,13 @@ export function Register() {
                             <input
                                 value={inputs.password}
                                 onChange={(e) => setInputs({ ...inputs, password: e.target.value })}
-                                type="password" name="password" id="password" autoComplete="password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6" />
+                                type="password" name="password" id="password" autoComplete="password" required className="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6" />
                         </div>
                     </div>
 
                     <div>
 
-                        <button type="submit" className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 cursor-pointer">
+                        <button type="submit" className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 cursor-pointer">
 
                             {isLoading ? (
                                 <div role="status">
@@ -84,14 +84,13 @@ export function Register() {
 
                             ) : "Cadastre-se"}
 
-
                         </button>
                     </div>
                 </form>
 
                 <p className="mt-10 text-center text-sm/6 text-gray-500">
                     Não possui conta?
-                    <Link to={"/login"} className="ml-0.5 font-semibold text-indigo-600 hover:text-indigo-500">Faça o seu cadastro</Link>
+                    <Link to={"/login"} className="ml-0.5 font-semibold text-blue-600 hover:text-blue-500">Faça o seu cadastro</Link>
                 </p>
             </div>
         </div>
