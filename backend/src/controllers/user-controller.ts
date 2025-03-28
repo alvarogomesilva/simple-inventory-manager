@@ -19,3 +19,20 @@ export async function registerUser(request: Request, response: Response) {
         response.status(500).send("Erro não tratado.");
     }
 }
+
+export async function login(request: Request, response: Response) {
+    const authData = request.body
+
+    try {
+        const auth = await userService.autenticate(authData)
+        response.status(200).send(auth)
+    } catch (error: any) {
+
+        if (error.message == 'email/password incorretos') {
+            response.status(400).json({ message: error.message })
+            return;
+        }
+        response.status(500).send("Erro interno.");
+        console.log(error)
+    }
+}
