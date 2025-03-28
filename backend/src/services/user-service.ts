@@ -21,5 +21,5 @@ export async function autenticate(authData: AuthUserDto) {
         userId: user.id,
     }, process.env.JWT_SECRET as string, { subject: user.id, expiresIn: '1d' })
 
-    return { access_token: token };
+    return { token: token };
 }
