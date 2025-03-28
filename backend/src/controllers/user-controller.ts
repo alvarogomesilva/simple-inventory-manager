@@ -36,3 +36,20 @@ export async function login(request: Request, response: Response) {
         console.log(error)
     }
 }
+
+export async function details(request: Request, response: Response) {
+    const userId = request.userId as string;
+
+    try {
+        const user = await userService.detailUser(userId)
+        response.status(200).json(user)
+    } catch (error: any) {
+
+        if (error.message === 'usuário inválido') {
+            response.status(400).json({ message: error.message })
+            return;
+        }
+
+        console.log(error)
+    }
+}

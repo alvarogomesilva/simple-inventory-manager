@@ -23,3 +23,12 @@ export async function autenticate(authData: AuthUserDto) {
 
     return { token: token };
 }
+
+export async function detailUser(userId: string) {
+    const user = await userRepository.finById(userId)
+
+    if (!user) throw new Error('usuário inválido')
+
+    return user
+
+}
