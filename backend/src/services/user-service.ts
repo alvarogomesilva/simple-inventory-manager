@@ -21,7 +21,7 @@ export async function autenticate(authData: AuthUserDto) {
         userId: user.id,
     }, process.env.JWT_SECRET as string, { subject: user.id, expiresIn: '1d' })
 
-    return { token: token };
+    return { user: user, token: token };
 }
 
 export async function detailUser(userId: string) {

@@ -5,31 +5,36 @@ interface User {
   id: string;
   name: string;
   email: string;
-};
+}
 
-interface AuthState  {
+interface AuthState {
   user: User | null;
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   logout: () => void;
-};
+}
 
-export const useAuthStore = create<AuthState>((set) => ({
-  user: null,
-  token: null,
+export const useAuthStore = create<AuthState>((set) => {
+  const savedToken = localStorage.getItem('@t');
+  const savedUser = savedToken ? JSON.parse(localStorage.getItem('@u') || '{}') : null;
 
-  login: async (email, password) => {
+  return {
+    user: savedUser,
+    token: savedToken,
 
-    const response = await api.post('/login', {email, password})
-    if (response.data) {
-      //set({ user: response.user, token: response.token });
-      console.log(response.data)
-    }
-  },
+    login: async (email, password) => {
+      const response = await api.post('/login', { email, password });
+      if (response.data) {
+        localStorage.setItem('@t', JSON.stringify(response.data.token));
+        localStorage.setItem('@u', JSON.stringify(response.data.user));
+        set({ user: response.data.user, token: response.data.token });
+      }
+    },
 
-  logout: () => {
-    //set({ user: null, token: null });
-    //localStorage.removeItem("token");
-    console.log('deslogou')
-  },
-}));
+    logout: () => {
+      localStorage.removeItem("@t");
+      localStorage.removeItem("@u");
+      set({ user: null, token: null });
+    },
+  };
+});

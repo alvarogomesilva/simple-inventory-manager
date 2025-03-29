@@ -1,19 +1,30 @@
-import { BrowserRouter, Route, Routes } from "react-router"
-import { Login } from "./pages/Login"
-import { Register } from "./pages/Register"
-import { Dashboard } from "./pages/Dashboard"
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Dashboard } from "./pages/Dashboard";
+import { Login } from "./pages/Login";
+import { Register } from "./pages/Register";
+import { PrivateRoute } from "./routes/PrivateRoute";
+import { PublicRoute } from "./routes/PublicRoute";
 
 function App() {
-  
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/register" element={<Register />}/>
-        <Route path="/" element={<Dashboard />}/>
+       
+        <Route element={<PublicRoute />}>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+        </Route>
+
+      
+        <Route element={<PrivateRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+        </Route>
+
+      
+        <Route path="*" element={<Login />} />
       </Routes>
-    </BrowserRouter>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
