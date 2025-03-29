@@ -17,7 +17,7 @@ function App() {
 
       
         <Route element={<PrivateRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
+          <Route index path="/dashboard" element={<Dashboard />} />
         </Route>
 
       

@@ -1,9 +1,9 @@
 import { FormEvent, useState } from "react";
 import { Link } from "react-router";
-import { api } from "../../services/api";
+import { useLogin } from "./hooks/use-login";
 
 export function Register() {
-    const [isLoading, setIsLoading] = useState(false)
+    const { isLoading, login } = useLogin()
     const [inputs, setInputs] = useState({
         name: "",
         email: "",
@@ -11,22 +11,9 @@ export function Register() {
     })
 
     const handleSubmit = async (e: FormEvent) => {
-        setIsLoading(true)
         e.preventDefault()
 
-        try {
-            const response = await api.post('/register', inputs)
-            console.log(response.data)
-            setInputs({
-                name: "",
-                email: "",
-                password: ""
-            })
-        } catch (error) {
-            console.log(error)
-        } finally {
-            setIsLoading(false)
-        }
+        await login(inputs)
     }
 
     return (

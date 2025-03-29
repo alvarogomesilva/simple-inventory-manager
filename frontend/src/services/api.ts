@@ -1,6 +1,4 @@
 import axios from "axios";
-import { useAuthStore } from "../store/use-auth-store";
-import { useNavigate } from 'react-router-dom';
 
 export const api = axios.create({
     baseURL: 'http://192.168.0.84:3000'
