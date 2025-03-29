@@ -11,29 +11,15 @@ export const api = axios.create({
 // ====================================================
 api.interceptors.request.use(
     (config) => {
-      const token = localStorage.getItem('@u');
+      const token = localStorage.getItem('@t');
+
       if (token) {
-        config.headers['Authorization'] = `Bearer ${token}`;
+        config.headers['Authorization'] = `Bearer ${JSON.parse(token)}`;
       }
       return config;
     },
     (error) => {
+      
       return Promise.reject(error);
     }
   );
-
-// Interceptor para verificar erro de token expirado
-// ===================================================
-api.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        if (error.response && error.response.status === 401) {
-
-            const { logout } = useAuthStore.getState();
-            const navigate = useNavigate()
-            logout();
-            navigate('/login')
-        }
-        return Promise.reject(error);
-    }
-);

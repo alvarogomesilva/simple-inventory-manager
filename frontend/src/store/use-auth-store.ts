@@ -18,6 +18,19 @@ export const useAuthStore = create<AuthState>((set) => {
   const savedToken = localStorage.getItem('@t');
   const savedUser = savedToken ? JSON.parse(localStorage.getItem('@u') || '{}') : null;
 
+  if (savedToken) {
+    api.get('/me', {
+      headers: { Authorization: `Bearer ${JSON.parse(savedToken)}` }
+    })
+    .then(() => {
+      set({ user: savedUser, token: savedToken });
+    })
+    .catch(() => {
+      localStorage.removeItem('@t');
+      localStorage.removeItem('@u');
+      set({ user: null, token: null });
+    });
+  }
   return {
     user: savedUser,
     token: savedToken,
