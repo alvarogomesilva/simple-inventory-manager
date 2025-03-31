@@ -1,8 +1,7 @@
-// Dashboard.tsx
 import React, { useEffect, useRef, useState } from "react";
-import { Menu, Home, Users, BarChart2, Settings, HelpCircle, Bell, Search, X, ChevronRight, User, LogOut } from "lucide-react";
+import { Menu, Box, Home, Activity, ChartBarBig, Users, BarChart2, Settings, HelpCircle, Bell, Search, X, ChevronRight, User, LogOut } from "lucide-react";
 
-// Interfaces para tipagem
+
 interface DashboardCardProps {
     title: string;
     value: string;
@@ -112,8 +111,22 @@ export function Dashboard() {
                             href="#"
                             className="flex items-center rounded-md px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 font-medium"
                         >
-                            <Users className="h-5 w-5 mr-3 text-gray-500" />
-                            Usuários
+                            <ChartBarBig className="h-5 w-5 mr-3 text-gray-500" />
+                            Categorias
+                        </a>
+                        <a
+                            href="#"
+                            className="flex items-center rounded-md px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 font-medium"
+                        >
+                            <Box className="h-5 w-5 mr-3 text-gray-500" />
+                            Produtos
+                        </a>
+                        <a
+                            href="#"
+                            className="flex items-center rounded-md px-4 py-2 text-gray-600 hover:bg-gray-100 hover:text-gray-900 font-medium"
+                        >
+                            <Activity className="h-5 w-5 mr-3 text-gray-500" />
+                            Movimentações
                         </a>
                         <a
                             href="#"
