@@ -14,12 +14,8 @@ export function Register() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-
-    // Validação com Zod
     const result = registerSchema.safeParse(inputs);
-
     if (!result.success) {
-      // Se houver erros, armazenamos no estado `errors`
       const formattedErrors = result.error.format();
       setErrors({
         name: formattedErrors.name?._errors[0],
@@ -29,7 +25,6 @@ export function Register() {
       return;
     }
 
-    // Se não houver erros, limpar os erros e tentar logar
     setErrors({});
     setInputs({ name: "", email: "", password: ""})
     await register(inputs);

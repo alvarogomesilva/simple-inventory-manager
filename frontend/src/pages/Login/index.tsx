@@ -1,9 +1,9 @@
 import { Link } from "react-router";
-import { useAuthStore } from "../../store/use-auth-store";
 import { FormEvent, useState } from "react";
+import { useLogin } from "./hooks/use-login";
 
 export function Login() {
-        const { login } = useAuthStore()
+        const { signIn, isLoading } = useLogin()
         const [inputs, setInputs] = useState({
             email: "",
             password: ""
@@ -11,12 +11,7 @@ export function Login() {
     
         const handleSubmit = async (e: FormEvent) => {
             e.preventDefault()
-    
-            try {
-                await login(inputs.email, inputs.password)
-            } catch (error) {
-                console.log(error)
-            }
+            await signIn(inputs)
         }
 
     return (
@@ -56,7 +51,9 @@ export function Login() {
                     </div>
 
                     <div>
-                        <button type="submit" className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 cursor-pointer">Sign in</button>
+                        <button type="submit" className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-xs hover:bg-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue-600 cursor-pointer">
+                        {isLoading ? "Carregando..." : "Login"}
+                        </button>
                     </div>
                 </form>
 
