@@ -1,8 +1,10 @@
 import { Bell, LogOut, MenuIcon, Settings, User } from "lucide-react";
 import { Sidebar } from "../Sidebar";
 import { useEffect, useRef, useState } from "react";
+import { useAuthStore } from "../../store/use-auth-store";
 
 export function Layout({ children }: { children: React.ReactNode }) {
+    const { logout } = useAuthStore()
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const userMenuRef = useRef<HTMLDivElement>(null);
@@ -50,8 +52,10 @@ export function Layout({ children }: { children: React.ReactNode }) {
                                         <Settings className="w-4 h-4 mr-2" /> Configurações
                                     </a>
                                     <hr className="border-gray-200" />
-                                    <a href="#" className="flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
-                                        <LogOut className="w-4 h-4 mr-2" /> Sair
+                                    <a  
+                                    
+                                    onClick={() => logout()} className="cursor-pointer flex items-center px-4 py-2 text-sm text-red-600 hover:bg-gray-100">
+                                        <LogOut  className="w-4 h-4 mr-2" /> Sair
                                     </a>
                                 </div>
                             )}
