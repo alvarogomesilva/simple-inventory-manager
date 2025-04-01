@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useAuthStore } from "../../../store/use-auth-store";
+import toast from "react-hot-toast";
 
 interface LoginProps {
     email: string;
@@ -16,7 +17,7 @@ export const useLogin = () => {
         try {
             await login(email, password)
         } catch (error) {
-            
+            toast.error('Email/senha incorretos', { position: "top-right" })
         } finally {
             setIsLoading(false)
         }
