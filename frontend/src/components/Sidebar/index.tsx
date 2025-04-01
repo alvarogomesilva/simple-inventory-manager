@@ -1,15 +1,15 @@
-import { Box, Home, Users, BarChart2, Settings, HelpCircle, X, ChartBarBig } from "lucide-react";
+import { Box, Home, BarChart2, Settings, HelpCircle, X, ChartBarBig, CircleChevronLeft } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 export function Sidebar({ sidebarOpen, toggleSidebar }: { sidebarOpen: boolean; toggleSidebar: () => void }) {
     const location = useLocation();
 
     const isActive = (path: string) =>
-        location.pathname === path ? "bg-blue-100 text-gray-900 font-medium" : "text-gray-600 hover:bg-gray-100 hover:text-gray-900";
+        location.pathname === path ? "bg-blue-500 text-white font-normal" : "text-white-600 hover:bg-gray-100 hover:text-gray-900";
 
     return (
         <>
-            {sidebarOpen && <div className="fixed inset-0 bg-gray-400 bg-opacity-50 z-20 lg:hidden" onClick={toggleSidebar} />}
+            {sidebarOpen && <div className="fixed inset-0 bg-gray-400 bg-opacity z-20 lg:hidden" onClick={toggleSidebar} />}
             <aside
                 className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-screen ${
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
@@ -21,13 +21,13 @@ export function Sidebar({ sidebarOpen, toggleSidebar }: { sidebarOpen: boolean; 
                             <div className="h-8 w-8 rounded-md bg-blue-600 flex items-center justify-center">
                                 <span className="text-white font-bold">A</span>
                             </div>
-                            <h1 className="ml-2 text-xl font-bold">Administração</h1>
+                            <h1 className="ml-2 text-xl font-bold text-blue-700">Administração</h1>
                         </div>
                         <button
-                            className="rounded-md p-1 text-gray-500 hover:bg-gray-100 hover:text-gray-700 lg:hidden"
+                            className="rounded-md p-1 text-gray-500 ml-4 cursor-pointer hover:bg-gray-100 hover:text-gray-700 lg:hidden"
                             onClick={toggleSidebar}
                         >
-                            <X size={20} />
+                            <CircleChevronLeft size={25} />
                         </button>
                     </div>
                     <nav className="flex-1 space-y-1 px-2 py-4">
