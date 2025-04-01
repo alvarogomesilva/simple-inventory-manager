@@ -1,9 +1,10 @@
 import { Layout } from "../../components/Layout";
+import ResponsiveTable from "../../components/Table";
 
 export function Categories() {
     return (
         <Layout>
-            <h1>Tela de categorias</h1>
+            <ResponsiveTable />
         </Layout>
     )
 }
