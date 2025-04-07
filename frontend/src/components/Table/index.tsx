@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, Edit, Trash2, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
+import { Modal } from '../Modal';
 
 // Definindo os tipos
 type User = {
@@ -145,14 +146,12 @@ const ResponsiveTable: React.FC = () => {
     for (let i = 1; i <= totalPages; i++) {
         pageNumbers.push(i);
     }
-
     return (
         <div className="container mx-auto p-4">
 
-            <div className="flex justify-between items-center mb-1 p-4">
-                <h1 className="text-2xl font-bold">Categorias</h1>
-                <button className="bg-blue-600 rounded-sm py-2 px-4 text-white cursor-pointer">Adicionar</button>
-            </div>
+            
+            
+          
 
             {/* Área de Pesquisa e Filtros */}
             <div className="bg-white p-4 rounded-lg shadow mb-6">
@@ -425,5 +424,8 @@ const ResponsiveTable: React.FC = () => {
         </div>
     );
 };
+
+
+
 
 export default ResponsiveTable;
