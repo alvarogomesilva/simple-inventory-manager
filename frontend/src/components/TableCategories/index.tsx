@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Eye, Edit, Trash2, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
-import { Modal } from '../Modal';
+import { Modal } from '../ModalCategories';
 
 // Definindo os tipos
 type User = {
@@ -28,7 +28,7 @@ const initialUsers: User[] = [
     { id: 12, name: 'Amanda Dias', email: 'amanda.dias@exemplo.com', role: 'Usuário', status: 'active', lastLogin: '2025-03-30' },
 ];
 
-const ResponsiveTable: React.FC = () => {
+export const TableCategories =  () => {
     const [users, setUsers] = useState<User[]>([]);
     const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
@@ -424,8 +424,3 @@ const ResponsiveTable: React.FC = () => {
         </div>
     );
 };
-
-
-
-
-export default ResponsiveTable;

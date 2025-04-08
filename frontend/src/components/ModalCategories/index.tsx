@@ -4,7 +4,7 @@ interface ModalProps {
   onClose: () => void;
 }
 
-export function Modal({ isOpen, onClose }: ModalProps) {
+export function ModalCategories({ isOpen, onClose }: ModalProps) {
   return (
     <div
       id="crud-modal"
