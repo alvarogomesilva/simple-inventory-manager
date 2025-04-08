@@ -1,4 +1,4 @@
-import { Box, Home, BarChart2, Settings, HelpCircle, X, ChartBarBig, CircleChevronLeft } from "lucide-react";
+import { Box, Home, BarChart2, Settings, HelpCircle, ChartBarBig, CircleChevronLeft, Truck } from "lucide-react";
 import { Link, useLocation } from "react-router-dom";
 
 export function Sidebar({ sidebarOpen, toggleSidebar }: { sidebarOpen: boolean; toggleSidebar: () => void }) {
@@ -42,6 +42,10 @@ export function Sidebar({ sidebarOpen, toggleSidebar }: { sidebarOpen: boolean; 
                         <Link to="/products" className={`flex items-center rounded-md px-4 py-2 ${isActive("/products")}`}>
                             <Box className="h-5 w-5 mr-3" />
                             Produtos
+                        </Link>
+                        <Link to="/suppliers" className={`flex items-center rounded-md px-4 py-2 ${isActive("/suppliers")}`}>
+                            <Truck className="h-5 w-5 mr-3" />
+                            Fornecedores
                         </Link>
                         <Link to="/transactions" className={`flex items-center rounded-md px-4 py-2 ${isActive("/transactions")}`}>
                             <BarChart2 className="h-5 w-5 mr-3" />
