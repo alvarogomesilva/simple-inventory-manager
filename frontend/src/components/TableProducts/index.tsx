@@ -27,7 +27,7 @@ const initialUsers: User[] = [
     { id: 12, name: 'Amanda Dias', email: 'amanda.dias@exemplo.com', role: 'Usuário', status: 'active', lastLogin: '2025-03-30' },
 ];
 
-export const TableCategories =  () => {
+export const TableProducts =  () => {
     const [users, setUsers] = useState<User[]>([]);
     const [filteredUsers, setFilteredUsers] = useState<User[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
