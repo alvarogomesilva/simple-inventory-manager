@@ -6,6 +6,7 @@ import { PrivateRoute } from "./routes/PrivateRoute";
 import { PublicRoute } from "./routes/PublicRoute";
 import { ResetPassword } from "./pages/Reset-Password";
 import { Categories } from "./pages/Categories";
+import { Products } from "./pages/Products";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route element={<PrivateRoute />}>
           <Route index path="/dashboard" element={<Dashboard />} />
           <Route path="/categories" element={<Categories />} />
+          <Route path="/products" element={<Products />} />
         </Route>
 
       
