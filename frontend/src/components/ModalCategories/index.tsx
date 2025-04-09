@@ -12,9 +12,11 @@ export function ModalCategories({ isOpen, onClose }: ModalProps) {
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
-    setIsLoading(true)
     e.preventDefault()
 
+    if (!name || name.trim() === '') return;
+
+    setIsLoading(true)
     try {
       await api.post('/categories', { name })
       setName('')
@@ -42,7 +44,6 @@ export function ModalCategories({ isOpen, onClose }: ModalProps) {
 
       <div className="relative z-10 p-4 w-full max-w-md max-h-full">
         <div className="bg-white dark:bg-gray-700/70 backdrop-blur-md rounded-lg shadow-lg border border-gray-300 dark:border-gray-600">
-          {/* Header */}
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
               Nova categoria
@@ -96,10 +97,10 @@ export function ModalCategories({ isOpen, onClose }: ModalProps) {
             <button
               onClick={handleSubmit}
               type="submit"
-              className="text-white text-center mt-2 bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-sm text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
+              className="text-white text-center mt-2 bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-sm text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
             >
 
-              {isLoading ? 'Carregando...': 'Salvar'}
+              {isLoading ? 'Carregando...' : 'Salvar'}
             </button>
           </form>
         </div>
