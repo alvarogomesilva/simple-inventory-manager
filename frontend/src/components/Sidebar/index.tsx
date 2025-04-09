@@ -47,7 +47,7 @@ export function Sidebar({ sidebarOpen, toggleSidebar }: { sidebarOpen: boolean; 
                             <Truck className="h-5 w-5 mr-3" />
                             Fornecedores
                         </Link>
-                        <Link to="/transactions" className={`flex items-center rounded-md px-4 py-2 ${isActive("/transactions")}`}>
+                        <Link to="/movements" className={`flex items-center rounded-md px-4 py-2 ${isActive("/movements")}`}>
                             <BarChart2 className="h-5 w-5 mr-3" />
                             Movimentações
                         </Link>
