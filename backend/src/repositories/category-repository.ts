@@ -6,3 +6,7 @@ export async function create(data: CreateCategoryDto) {
         data: { name: data.name }
     })
 }
+
+export async function getCategories() {
+    return await prismaClient.category.findMany()
+}

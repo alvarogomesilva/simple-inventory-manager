@@ -13,3 +13,13 @@ export async function registerCategory(request: Request, response: Response) {
         response.status(500).send("Erro não tratado.");
     }
 }
+
+export async function listAllCategories(request: Request, response: Response) {
+    try {
+        const categories = await categoryService.getCategories()
+        response.status(200).json(categories)
+    } catch (error) {
+        console.log(error)
+        response.status(500).send("Erro ao carregar todas as categorias")
+    }
+}

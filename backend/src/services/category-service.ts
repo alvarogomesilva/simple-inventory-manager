@@ -4,3 +4,7 @@ import * as categoryRepository from '../repositories/category-repository';
 export async function createNewCategory(categoryData: CreateCategoryDto) {
     return await categoryRepository.create(categoryData)
 }
+
+export async function getCategories() {
+    return await categoryRepository.getCategories()
+}

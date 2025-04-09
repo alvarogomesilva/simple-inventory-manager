@@ -6,4 +6,6 @@ import { createCategory } from "../validations/category-validation";
 
 export const categoriesRoutes = (app: Express) => {
     app.post('/categories', isAutenticated, validateRequestBody(createCategory), categoryController.registerCategory)
+
+    app.get('/categories', isAutenticated, categoryController.listAllCategories)
 }
