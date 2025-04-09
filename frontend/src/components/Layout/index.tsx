@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAuthStore } from "../../store/use-auth-store";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-    const { logout } = useAuthStore();
+    const { logout, user } = useAuthStore();
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [userMenuOpen, setUserMenuOpen] = useState(false);
     const userMenuRef = useRef<HTMLDivElement>(null);
@@ -40,7 +40,7 @@ export function Layout({ children }: { children: React.ReactNode }) {
                                 <div className="flex items-center space-x-3 cursor-pointer" onClick={toggleUserMenu}>
                                     <img src="https://placehold.co/40" alt="Avatar" className="h-8 w-8 rounded-full" />
                                     <div className="hidden lg:block">
-                                        <p className="text-sm font-medium">João Silva</p>
+                                        <p className="text-sm font-medium">{user?.name}</p>
                                         <p className="text-xs text-gray-500">Administrador</p>
                                     </div>
                                 </div>
