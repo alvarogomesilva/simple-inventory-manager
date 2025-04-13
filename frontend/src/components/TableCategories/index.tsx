@@ -1,19 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Eye, Edit, Trash2, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
-import { api } from '../../services/api';
+import { useCategories } from './hooks/useCategories';
 
 // Definindo os tipos
-type Categories = {
-    id: string;
-    name: string;
-    createdAt: Date;
-    updatedAt: Date;
-};
+
 
 
 
 export const TableCategories = () => {
-    const [categories, setCategories] = useState<Categories[]>([]);
+    const { categories, fetchCategories } = useCategories()
     const [filteredUsers, setFilteredUsers] = useState<[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -26,16 +21,7 @@ export const TableCategories = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [userToDelete, setUserToDelete] = useState<number | null>(null);
 
-    useEffect(() => {
-        async function getCategories() {
-            const categories = await api.get('/categories')
-            setCategories(categories.data)
-        }
 
-        getCategories()
-
-   
-    }, [categories])
 
     // Aplicar filtros
     // useEffect(() => {
