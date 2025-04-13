@@ -8,3 +8,7 @@ export async function createNewCategory(categoryData: CreateCategoryDto) {
 export async function getCategories() {
     return await categoryRepository.getCategories()
 }
+
+export async function deleteCategory(id: string) {
+    return await categoryRepository.deleteCategory(id)
+}

@@ -23,3 +23,15 @@ export async function listAllCategories(request: Request, response: Response) {
         response.status(500).send("Erro ao carregar todas as categorias")
     }
 }
+
+
+export async function deleteCategory(request: Request, response: Response) {
+    try {
+        const id = request.params.id as string
+        const deleteCategory = await categoryService.deleteCategory(id)
+        response.status(200).json(deleteCategory)
+    } catch (error) {
+        console.log(error)
+        response.status(500).send("Erro ao deletar a categoria")
+    }
+}

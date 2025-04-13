@@ -8,4 +8,5 @@ export const categoriesRoutes = (app: Express) => {
     app.post('/categories', isAutenticated, validateRequestBody(createCategory), categoryController.registerCategory)
 
     app.get('/categories', isAutenticated, categoryController.listAllCategories)
+    app.delete('/categories/:id', isAutenticated, categoryController.deleteCategory)
 }
