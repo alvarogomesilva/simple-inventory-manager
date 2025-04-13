@@ -1,9 +1,10 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { FormEvent, useState } from "react";
 import { useLogin } from "./hooks/use-login";
 import { loginSchema } from "./validations/login-validation";
 
 export function Login() {
+    const navigate = useNavigate()
     const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
     const { signIn, isLoading } = useLogin()
     const [inputs, setInputs] = useState({
@@ -24,6 +25,7 @@ export function Login() {
         }
         setErrors({});
         await signIn(inputs)
+        navigate('/dashboard')
     }
 
     return (
