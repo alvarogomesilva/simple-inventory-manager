@@ -2,13 +2,8 @@ import { useState } from 'react';
 import { Eye, Edit, Trash2, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCategories } from './hooks/useCategories';
 
-// Definindo os tipos
-
-
-
-
 export const TableCategories = () => {
-    const { categories, fetchCategories } = useCategories()
+    const { categories, fetchCategories, handleDelete } = useCategories()
     const [filteredUsers, setFilteredUsers] = useState<[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -18,8 +13,9 @@ export const TableCategories = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     // Estado para modal de confirmação de exclusão
+    
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
-    const [userToDelete, setUserToDelete] = useState<number | null>(null);
+    const [categoryDelete, setCategoryDelete] = useState<string>('');
 
 
 
@@ -115,10 +111,14 @@ export const TableCategories = () => {
     //     }
     // };
 
-    const cancelDelete = () => {
-        setDeleteModalOpen(false);
-        setUserToDelete(null);
-    };
+    const cancelDelete = () => setDeleteModalOpen(false);
+    
+    
+
+    const handleDeleteCategory = (id: string) => {
+        setDeleteModalOpen(true) 
+        setCategoryDelete(id)
+    }
 
     // Gerar array de números de página
     const pageNumbers = [];
@@ -249,7 +249,7 @@ export const TableCategories = () => {
                                                     <Edit size={18} />
                                                 </button>
                                                 <button
-                                                    //onClick={() => openDeleteModal(user.id)}
+                                                    onClick={() => handleDeleteCategory(categorie.id)}
                                                     className="text-red-600 hover:text-red-800 p-1 rounded-full hover:bg-red-100 cursor-pointer"
                                                     title="Excluir"
                                                 >
@@ -327,22 +327,25 @@ export const TableCategories = () => {
 
             {/* Modal de Confirmação de Exclusão */}
             {deleteModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-50 flex items-center justify-center p-4">
+                <div className="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 flex items-center justify-center p-4">
                     <div className="bg-white rounded-lg max-w-md w-full p-6 shadow-xl">
                         <h3 className="text-lg font-medium text-gray-900 mb-4">Confirmar Exclusão</h3>
                         <p className="text-sm text-gray-500 mb-6">
-                            Tem certeza que deseja excluir este usuário? Esta ação não pode ser desfeita.
+                            Tem certeza que deseja excluir esta categoria? Esta ação não pode ser desfeita.
                         </p>
                         <div className="flex justify-end space-x-3">
                             <button
                                 onClick={cancelDelete}
-                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300"
+                                className="px-4 py-2 bg-gray-200 text-gray-800 rounded-md hover:bg-gray-300 cursor-pointer"
                             >
                                 Cancelar
                             </button>
                             <button
-                                //onClick={handleDelete}
-                                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700"
+                                onClick={() => {
+                                    handleDelete(categoryDelete)
+                                    cancelDelete()
+                                }}
+                                className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 cursor-pointer"
                             >
                                 Excluir
                             </button>

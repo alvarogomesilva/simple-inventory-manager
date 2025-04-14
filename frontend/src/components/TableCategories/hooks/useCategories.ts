@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Categories } from "../../../types/categories";
-import { getCategories } from "../../../services/categoryService";
+import { deleteCategory, getCategories } from "../../../services/categoryService";
 
 
 export const useCategories = () => {
@@ -11,11 +11,15 @@ export const useCategories = () => {
         setCategories(data)
     }
 
+    const handleDelete = async (id: string) => {
+        await deleteCategory(id)
+    }
+
 
     useEffect(() => {
         fetchCategories()
 
     }, [categories])
 
-    return { categories, fetchCategories }
+    return { categories, fetchCategories, handleDelete }
 }
