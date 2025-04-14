@@ -1,5 +1,6 @@
 import { CreateCategoryDto } from "../types/categories/create-category.dto";
 import * as categoryRepository from '../repositories/category-repository';
+import { UpdateCategoryDto } from "../types/categories/upadte-category.dto";
 
 export async function createNewCategory(categoryData: CreateCategoryDto) {
     return await categoryRepository.create(categoryData)
@@ -7,6 +8,10 @@ export async function createNewCategory(categoryData: CreateCategoryDto) {
 
 export async function getCategories() {
     return await categoryRepository.getCategories()
+}
+
+export async function updateCategory(categoryData: UpdateCategoryDto) {
+    return await categoryRepository.updateCategory(categoryData)
 }
 
 export async function deleteCategory(id: string) {

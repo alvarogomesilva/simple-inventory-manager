@@ -1,6 +1,7 @@
 import { string } from "zod";
 import { prismaClient } from "../config/prisma-client";
 import { CreateCategoryDto } from "../types/categories/create-category.dto";
+import { UpdateCategoryDto } from "../types/categories/upadte-category.dto";
 
 export async function create(data: CreateCategoryDto) {
     return await prismaClient.category.create({
@@ -13,8 +14,14 @@ export async function getCategories() {
 }
 
 export async function deleteCategory(id: string) {
-
     return await prismaClient.category.delete({
         where: { id: id }
+    })
+}
+
+export async function updateCategory(data: UpdateCategoryDto) {
+    return await prismaClient.category.update({
+        where: { id: data.id },
+        data: { name: data.name }
     })
 }

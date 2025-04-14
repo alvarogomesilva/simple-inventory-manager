@@ -24,6 +24,19 @@ export async function listAllCategories(request: Request, response: Response) {
     }
 }
 
+export async function updateCategory(request: Request, response: Response) {
+    try {
+        const id = request.params.id
+        const categoryData = request.body
+        categoryData.id = id
+        
+        const updatedCategory = await categoryService.updateCategory(categoryData)
+        response.status(200).send(updatedCategory)
+    } catch (error) {
+        console.log(error)
+        response.status(500).send("Erro ao editar a categoria")
+    }
+}
 
 export async function deleteCategory(request: Request, response: Response) {
     try {
