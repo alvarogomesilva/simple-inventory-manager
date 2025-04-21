@@ -4,3 +4,8 @@ export type Categories = {
     createdAt: Date;
     updatedAt: Date;
 };
+
+export type CategoryEdit = {
+    id: string;
+    name: string;
+  }

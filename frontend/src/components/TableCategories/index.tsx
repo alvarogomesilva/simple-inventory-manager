@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Eye, Edit, Trash2, Search, Filter, ChevronLeft, ChevronRight } from 'lucide-react';
-import { useCategories } from './hooks/useCategories';
+import { useCategories } from '../../hooks/use-categories'
+import { ModalCategories } from '../ModalCategories';
+import { CategoryEdit } from '../../types/categories';
 
 export const TableCategories = () => {
     const { categories, fetchCategories, handleDelete } = useCategories()
@@ -13,9 +15,12 @@ export const TableCategories = () => {
     const [totalPages, setTotalPages] = useState(1);
 
     // Estado para modal de confirmação de exclusão
-    
+
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [categoryDelete, setCategoryDelete] = useState<string>('');
+
+    const [editModalOpen, setEditModalOpen] = useState(false)
+    const [editCategory, setEditCategory] = useState<CategoryEdit | undefined>()
 
 
 
@@ -112,11 +117,14 @@ export const TableCategories = () => {
     // };
 
     const cancelDelete = () => setDeleteModalOpen(false);
-    
-    
+
+    const handleEditCategory = (id: string, name: string) => {
+        setEditModalOpen(true)
+        setEditCategory({id, name})
+    }
 
     const handleDeleteCategory = (id: string) => {
-        setDeleteModalOpen(true) 
+        setDeleteModalOpen(true)
         setCategoryDelete(id)
     }
 
@@ -129,13 +137,9 @@ export const TableCategories = () => {
         <div className="container mx-auto p-4">
 
 
-
-
-
-      
             <div className="bg-white p-4 rounded-lg shadow mb-6">
                 <div className="mb-4">
-                    
+
                     <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <Search size={18} className="text-gray-400" />
@@ -153,7 +157,7 @@ export const TableCategories = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
 
-                  
+
                     <div>
                         <label htmlFor="itemsPerPage" className="block text-sm font-medium text-gray-700 mb-1">
                             Itens por página
@@ -242,7 +246,10 @@ export const TableCategories = () => {
                                                     <Eye size={18} />
                                                 </button>
                                                 <button
-                                                    //onClick={() => handleEdit(user.id)}
+                                                    onClick={
+                                                        () => handleEditCategory(categorie.id, categorie.name)
+
+                                                    }
                                                     className="text-green-600 hover:text-green-800 p-1 rounded-full hover:bg-green-100 cursor-pointer"
                                                     title="Editar"
                                                 >
@@ -324,6 +331,16 @@ export const TableCategories = () => {
                     </div>
                 )}
             </div>
+
+            {/* Modal de Confirmação de Edit */}
+            {editModalOpen && (
+                <ModalCategories
+                    isOpen={editModalOpen}
+                    onClose={() => setEditModalOpen(false)}
+                    isEdit={true}
+                    editData={editCategory}
+                />
+            )}
 
             {/* Modal de Confirmação de Exclusão */}
             {deleteModalOpen && (

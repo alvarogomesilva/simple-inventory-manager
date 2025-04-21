@@ -1,20 +1,27 @@
 import { FormEvent, useState } from "react";
 import { api } from "../../services/api";
 import toast from "react-hot-toast";
+import { CategoryEdit } from "../../types/categories";
+import { useCategories } from "../../hooks/use-categories";
+
 
 interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
+  isEdit?: boolean;
+  editData?: CategoryEdit
 }
 
-export function ModalCategories({ isOpen, onClose }: ModalProps) {
+export function ModalCategories({ isOpen, onClose, isEdit, editData }: ModalProps) {
+  const { handleEdit } = useCategories()
   const [name, setName] = useState('')
+  const [categoryEdit, setCategoryEdit] = useState(editData?.name)
   const [isLoading, setIsLoading] = useState(false)
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
 
-    if (!name || name.trim() === '') return;
+    if (!name) return;
 
     setIsLoading(true)
     try {
@@ -28,12 +35,20 @@ export function ModalCategories({ isOpen, onClose }: ModalProps) {
     }
   }
 
+  const handleEditCategory = async (e: FormEvent) => {
+    e.preventDefault()
+    if (editData?.id !== undefined && categoryEdit) {
+
+      await handleEdit(editData?.id, categoryEdit)
+    }
+    //console.log('enviado')
+  }
+
   return (
     <div
       id="crud-modal"
       tabIndex={-1}
-      className={`${isOpen ? "flex" : "hidden"
-        } fixed inset-0 z-[999] justify-center items-center overflow-y-auto overflow-x-hidden`}
+      className={`${isOpen ? "flex" : "hidden"} fixed inset-0 z-[999] justify-center items-center overflow-y-auto overflow-x-hidden`}
     >
 
       <div
@@ -46,7 +61,7 @@ export function ModalCategories({ isOpen, onClose }: ModalProps) {
         <div className="bg-white dark:bg-gray-700/70 backdrop-blur-md rounded-lg shadow-lg border border-gray-300 dark:border-gray-600">
           <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t border-gray-200 dark:border-gray-600">
             <h3 className="text-lg font-semibold text-gray-900 dark:text-white">
-              Nova categoria
+              {isEdit ? 'Editar Categoria' : 'Nova categoria'}
             </h3>
             <button
               onClick={onClose}
@@ -80,22 +95,35 @@ export function ModalCategories({ isOpen, onClose }: ModalProps) {
                 >
                   Nome
                 </label>
-                <input
-                  type="text"
-                  name="name"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-blue-600 dark:border-blue-500 dark:text-white"
-                  placeholder="Digite uma nova categoria"
-                  required
-                />
+                {isEdit ? (
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={categoryEdit}
+                    onChange={(e) => setCategoryEdit(e.target.value)}
+                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-blue-600 dark:border-blue-500 dark:text-white"
+                    placeholder="Digite uma nova categoria"
+                    required
+                  />
+                ) : (
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-blue-600 dark:border-blue-500 dark:text-white"
+                    placeholder="Digite uma nova categoria"
+                    required
+                  />
+                )}
               </div>
             </div>
 
 
             <button
-              onClick={handleSubmit}
+              onClick={isEdit ? handleEditCategory : handleSubmit}
               type="submit"
               className="text-white text-center mt-2 bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-sm text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
             >

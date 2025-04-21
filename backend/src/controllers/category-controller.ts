@@ -26,11 +26,10 @@ export async function listAllCategories(request: Request, response: Response) {
 
 export async function updateCategory(request: Request, response: Response) {
     try {
-        const id = request.params.id
+        const categoryId = request.params.id as string
         const categoryData = request.body
-        categoryData.id = id
         
-        const updatedCategory = await categoryService.updateCategory(categoryData)
+        const updatedCategory = await categoryService.updateCategory(categoryId, categoryData)
         response.status(200).send(updatedCategory)
     } catch (error) {
         console.log(error)

@@ -10,8 +10,8 @@ export async function getCategories() {
     return await categoryRepository.getCategories()
 }
 
-export async function updateCategory(categoryData: UpdateCategoryDto) {
-    return await categoryRepository.updateCategory(categoryData)
+export async function updateCategory(categoryId: string, categoryData: UpdateCategoryDto) {
+    return await categoryRepository.updateCategory(categoryId, categoryData)
 }
 
 export async function deleteCategory(id: string) {

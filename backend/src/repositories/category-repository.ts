@@ -19,9 +19,9 @@ export async function deleteCategory(id: string) {
     })
 }
 
-export async function updateCategory(data: UpdateCategoryDto) {
+export async function updateCategory(id: string, data: UpdateCategoryDto) {
     return await prismaClient.category.update({
-        where: { id: data.id },
+        where: { id: id },
         data: { name: data.name }
     })
 }
