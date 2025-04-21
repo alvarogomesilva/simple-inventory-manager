@@ -1,48 +1,17 @@
 import { FormEvent, useState } from "react";
-import { api } from "../../services/api";
-import toast from "react-hot-toast";
-import { CategoryEdit } from "../../types/categories";
+import { ModalPropsCategories } from "../../types/categories";
 import { useCategories } from "../../hooks/use-categories";
 
 
-interface ModalProps {
-  isOpen: boolean;
-  onClose: () => void;
-  isEdit?: boolean;
-  editData?: CategoryEdit
-}
-
-export function ModalCategories({ isOpen, onClose, isEdit, editData }: ModalProps) {
-  const { handleEdit } = useCategories()
-  const [name, setName] = useState('')
-  const [categoryEdit, setCategoryEdit] = useState(editData?.name)
-  const [isLoading, setIsLoading] = useState(false)
+export function ModalCategories({ isOpen, onClose, isEdit, editData }: ModalPropsCategories) {
+  const { isLoading, handleNewCategory } = useCategories()
+  const [nameCategory, setNameCategory] = useState('')
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-
-    if (!name) return;
-
-    setIsLoading(true)
-    try {
-      await api.post('/categories', { name })
-      setName('')
-      toast.success('Categoria salva com sucesso!')
-    } catch (error) {
-      console.log(error)
-    } finally {
-      setIsLoading(false)
-    }
+    await handleNewCategory(nameCategory)
   }
 
-  const handleEditCategory = async (e: FormEvent) => {
-    e.preventDefault()
-    if (editData?.id !== undefined && categoryEdit) {
-
-      await handleEdit(editData?.id, categoryEdit)
-    }
-    //console.log('enviado')
-  }
 
   return (
     <div
@@ -95,35 +64,24 @@ export function ModalCategories({ isOpen, onClose, isEdit, editData }: ModalProp
                 >
                   Nome
                 </label>
-                {isEdit ? (
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={categoryEdit}
-                    onChange={(e) => setCategoryEdit(e.target.value)}
-                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-blue-600 dark:border-blue-500 dark:text-white"
-                    placeholder="Digite uma nova categoria"
-                    required
-                  />
-                ) : (
-                  <input
-                    type="text"
-                    name="name"
-                    id="name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    className="bg-white border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-blue-600 dark:border-blue-500 dark:text-white"
-                    placeholder="Digite uma nova categoria"
-                    required
-                  />
-                )}
+
+                <input
+                  type="text"
+                  name="name"
+                  id="name"
+                  value={nameCategory}
+                  onChange={(e) => setNameCategory(e.target.value)}
+                  className="bg-white border border-gray-300 text-gray-900 text-sm rounded-sm focus:ring-blue-600 focus:border-blue-600 block w-full p-2.5 dark:bg-blue-600 dark:border-blue-500 dark:text-white"
+                  placeholder="Digite uma nova categoria"
+                  required
+                />
+
               </div>
             </div>
 
 
             <button
-              onClick={isEdit ? handleEditCategory : handleSubmit}
+              onClick={handleSubmit}
               type="submit"
               className="text-white text-center mt-2 bg-blue-700 hover:bg-blue-800 focus:outline-none font-medium rounded-sm text-sm px-5 py-2.5 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800 cursor-pointer"
             >

@@ -333,14 +333,14 @@ export const TableCategories = () => {
             </div>
 
             {/* Modal de Confirmação de Edit */}
-            {editModalOpen && (
+            {/* {editModalOpen && (
                 <ModalCategories
                     isOpen={editModalOpen}
                     onClose={() => setEditModalOpen(false)}
                     isEdit={true}
                     editData={editCategory}
                 />
-            )}
+            )} */}
 
             {/* Modal de Confirmação de Exclusão */}
             {deleteModalOpen && (

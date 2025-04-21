@@ -8,4 +8,11 @@ export type Categories = {
 export type CategoryEdit = {
     id: string;
     name: string;
-  }
+}
+
+export type ModalPropsCategories = {
+  isOpen: boolean;
+  onClose: () => void;
+  isEdit?: boolean;
+  editData?: CategoryEdit
+}

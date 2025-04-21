@@ -1,5 +1,10 @@
 import { api } from "./api"
 
+export const newCategoryService = async (nameCategory: string) => {
+    const { data } = await api.post('/categories', { name: nameCategory })
+    return data
+}
+
 export const getCategories = async () => {
     const { data } = await api.get('/categories')
     return data
