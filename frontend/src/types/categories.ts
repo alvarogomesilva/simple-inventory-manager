@@ -14,5 +14,5 @@ export type ModalPropsCategories = {
   isOpen: boolean;
   onClose: () => void;
   isEdit?: boolean;
-  editData?: CategoryEdit
+  selectedCategoryEdit: CategoryEdit;
 }

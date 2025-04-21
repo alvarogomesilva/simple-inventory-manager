@@ -5,7 +5,8 @@ import { ModalCategories } from '../ModalCategories';
 import { CategoryEdit } from '../../types/categories';
 
 export const TableCategories = () => {
-    const { categories, fetchCategories, handleDelete } = useCategories()
+    const { categories, handleDelete } = useCategories()
+
     const [filteredUsers, setFilteredUsers] = useState<[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -19,8 +20,9 @@ export const TableCategories = () => {
     const [deleteModalOpen, setDeleteModalOpen] = useState(false);
     const [categoryDelete, setCategoryDelete] = useState<string>('');
 
+    // MODAL EDIT   
     const [editModalOpen, setEditModalOpen] = useState(false)
-    const [editCategory, setEditCategory] = useState<CategoryEdit | undefined>()
+    const [selectedCategoryEdit, setSelectedCategoryEdit] = useState({ id: "", name: "" })
 
 
 
@@ -120,7 +122,7 @@ export const TableCategories = () => {
 
     const handleEditCategory = (id: string, name: string) => {
         setEditModalOpen(true)
-        setEditCategory({id, name})
+        setSelectedCategoryEdit({ id: id, name: name })
     }
 
     const handleDeleteCategory = (id: string) => {
@@ -247,7 +249,9 @@ export const TableCategories = () => {
                                                 </button>
                                                 <button
                                                     onClick={
-                                                        () => handleEditCategory(categorie.id, categorie.name)
+                                                        () => handleEditCategory(
+                                                            categorie.id,
+                                                            categorie.name)
 
                                                     }
                                                     className="text-green-600 hover:text-green-800 p-1 rounded-full hover:bg-green-100 cursor-pointer"
@@ -333,14 +337,14 @@ export const TableCategories = () => {
             </div>
 
             {/* Modal de Confirmação de Edit */}
-            {/* {editModalOpen && (
+            {editModalOpen && (
                 <ModalCategories
                     isOpen={editModalOpen}
                     onClose={() => setEditModalOpen(false)}
                     isEdit={true}
-                    editData={editCategory}
+                    selectedCategoryEdit={selectedCategoryEdit}
                 />
-            )} */}
+            )}
 
             {/* Modal de Confirmação de Exclusão */}
             {deleteModalOpen && (

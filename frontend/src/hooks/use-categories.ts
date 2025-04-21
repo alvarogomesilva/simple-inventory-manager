@@ -4,7 +4,7 @@ import { deleteCategory, getCategories, newCategoryService, updateCategory } fro
 
 
 export const useCategories = () => {
-  const [isLoading, setIsLoading] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [categories, setCategories] = useState<Categories[]>([]);
 
     const handleNewCategory = async (nameCategory: string) => {
@@ -23,8 +23,9 @@ export const useCategories = () => {
     }
 
     const handleEdit = async (id: string, name: string) => {
-        const data = await updateCategory(id, name)
-        setCategories(data)
+        setIsLoading(true)
+        await updateCategory(id, name)
+        setIsLoading(false)
     }
 
 
