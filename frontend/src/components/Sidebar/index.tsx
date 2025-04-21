@@ -9,7 +9,7 @@ export function Sidebar({ sidebarOpen, toggleSidebar }: { sidebarOpen: boolean; 
 
     return (
         <>
-            {sidebarOpen && <div className="fixed inset-0 bg-gray-400 bg-opacity z-20 lg:hidden" onClick={toggleSidebar} />}
+            {sidebarOpen && <div className="fixed inset-0 z-20 lg:hidden bg-black/50 backdrop-blur-sm" onClick={toggleSidebar} />}
             <aside
                 className={`fixed inset-y-0 left-0 z-30 w-64 transform bg-white shadow-lg transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:h-screen ${
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
