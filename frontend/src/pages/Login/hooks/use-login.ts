@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { useAuthStore } from "../../../store/use-auth-store";
-import toast from "react-hot-toast";
+import {toast} from "sonner";
 
 interface LoginProps {
     email: string;

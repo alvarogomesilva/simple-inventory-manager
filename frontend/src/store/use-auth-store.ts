@@ -1,6 +1,6 @@
 import { create } from "zustand";
 import { api } from "../services/api";
-import toast from "react-hot-toast";
+import {toast} from "sonner";
 
 interface User {
   id: string;
